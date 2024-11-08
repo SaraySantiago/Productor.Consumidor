@@ -14,15 +14,21 @@ async def productor():
         print (f" siestatime: {snaptime}")
         time.sleep(snaptime)
         print (f" productor: {answ}")
-        algo =  answ
+        algo = answ
 
-async def consumidor(item):
+async def consumidor():
+    global algo
     while True:
-     print(f"consumidor:  {item}")
+        if algo != None:
+            print(f"consumidor:  {algo}")
+        await asyncio.sleep(1)
 
-
+async def main():
+    await asyncio.gather(
+        productor(),
+        consumidor()
+    )
 
 if __name__ ==  "__main__":
  
-        productor ()
-        consumidor ()
+     asyncio.run(main())
