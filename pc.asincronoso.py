@@ -2,11 +2,11 @@ import random
 import time 
 import asyncio
 
-algo = None
+buff = None # buffer atómico
 
 async def productor():
     
-    global algo
+    global buff
     
     while True:
         answ = random.randint (1,6)
@@ -14,13 +14,13 @@ async def productor():
         print (f" siestatime: {snaptime}")
         time.sleep(snaptime)
         print (f" productor: {answ}")
-        algo = answ
+        buff = answ
 
 async def consumidor():
-    global algo
+    global buff
     while True:
-        if algo != None:
-            print(f"consumidor:  {algo}")
+        if buff != None:
+            print(f"consumidor:  {buff}")
         await asyncio.sleep(1)
 
 async def main():
